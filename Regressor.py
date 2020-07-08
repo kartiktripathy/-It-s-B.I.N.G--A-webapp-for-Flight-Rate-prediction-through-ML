@@ -160,6 +160,6 @@ from sklearn.metrics import r2_score
 r2_score(y_test, y_pred)
 print("The R_2 Score is : ",r2_score(y_test, y_pred))
 
-
+#Save the model for further usage...I haven't uploaded the pkl file as it is quite large for the uploading !
 import pickle
 pickle.dump(regressor , open('flight_rate_predictor.pkl','wb'))

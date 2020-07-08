@@ -1,12 +1,16 @@
+#Importing the libraries
 import streamlit as st
 import pandas as pd
 import pickle
 
+#Loading the model from the pkl file that was stored before
+load_regg  = pickle.load(open('flight_rate_predictor.pkl', 'rb'))
+
+#Taking the input from the user
 st.image('flight.jpg')
 st.header("It's B.I.N.G!")
 st.write("Predict the prices of the flight, prior to journey!")
 st.write("Enter the details.")
-load_regg  = pickle.load(open('flight_rate_predictor.pkl', 'rb'))
 airline = st.selectbox("Airline", ('Indigo', 'Air India', 'Jet Airways',
                                 'SpiceJet', 'GoAir', 'Vistara', 'Air Asia',
                                 'Trujet','Multiple Carriers',
@@ -24,7 +28,7 @@ Total_stops = st.selectbox("No. of Stops",(0,1,2,3))
 dur_hour = Arrival_hour - Dep_hour
 dur_min = Arrival_min - Dep_min
 
-
+#Deencoding the input features, as we have encoded in the model
 if (airline == 'Jet Airways'):
     Jet_Airways = 1
     IndiGo = 0
@@ -254,7 +258,7 @@ else:
     d_Hyderabad = 0
     d_Kolkata = 0
 
-
+#predicting the output from the predict method
 prediction = load_regg.predict([[
     Total_stops,
     Journey_day,
@@ -289,5 +293,3 @@ prediction = load_regg.predict([[
 
 if st.button('Get the Price'):
     st.write((prediction))
-    st.header("Are you too going to 15, Yemen Road, Yemen ;)")
-    st.image('chandler.jpeg')
